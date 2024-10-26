@@ -1,0 +1,63 @@
+import { Link } from "react-router-dom";
+
+interface BlogCardProps {
+    name: string;
+    title: string;
+    content: string;
+    publishedDate: string;
+    id: number;
+}
+
+const BlogCard = ( {id,title,content,name,publishedDate}: BlogCardProps) => {
+
+  return<Link to={`/blog/${id}`}><div className=" mt-2 px-28">
+    <div className="flex justify-evenly items-center p-4">
+        <div className="flex flex-col gap-2 w-[750px] ">
+            <div className="flex gap-2 items-center">
+                <div>
+                    <Avatar name={name} size="small"/>
+                </div>
+                <div className="font-medium text-sm">{name}</div>
+                <div className="font-medium text-sm text-[#DEB68C]"style={{ wordSpacing: '-2px' }}>{publishedDate}</div>
+            </div>
+            <div>
+                <div className="font-bold text-2xl">{title}</div>
+            </div>
+            <div>
+                <div className="text-[#3c2309] font-serif">{content.slice(0,200)}...</div>
+            </div>
+            <div>
+                <div className="text-sm font-medium text-slate-500" style={{ wordSpacing: '-2px' }} >3 min read</div>
+            </div>
+        </div>
+        <div className="max-w-80">
+            <img src="https://brandminds.ro/wp-content/uploads/2021/07/blogging-for-business-blog-articles-e1536066690505.jpg"className=" rounded-lg" alt="blog-image"/>
+        </div>
+    </div>
+  </div>
+  </Link>
+};
+
+ const BlogCardUpdated = (BlogCard:any)=>{
+    return function EnhancedBlogCard(props){
+        const id = props.id
+        return<div className=" mb-2">
+        <BlogCard {...props}/>
+        <div className="text-center">
+           <Link to={`/update/${id}`}> <button className="bg-cyan-500 text-white px-3 py-1 rounded-lg">Update</button></Link>
+        </div>
+    </div>
+    }
+}
+export const EnhancedBlogCard = BlogCardUpdated(BlogCard);
+
+
+export const Avatar = ({name,size}:{name:string,size?:"small"| "big"})=>{
+    return <div className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-700 rounded-full ${size === "small" ? "w-6 h-6" : "w-10 h-10"}`}>
+    <span className={`${size === "small" ? "text-xs" : "text-md"} font-semibold text-gray-600 dark:text-gray-300`}>
+        {size === "big" ?"🐺":name[0]}
+    </span>
+</div>
+
+}
+export default BlogCard;
