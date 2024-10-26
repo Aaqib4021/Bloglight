@@ -9,7 +9,7 @@ const Blog = () => {
 
   return <div>
     <Appbar/>
-    <FullBlog blog={blog}/>
+    {blog ? <FullBlog blog={blog} /> : <p>Loading blog...</p>}
   </div>;
 };
 

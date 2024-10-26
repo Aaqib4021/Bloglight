@@ -35,7 +35,7 @@ export const useBlogs = () => {
 
 
 export const useUserBlogs = () => {
-    const [userblogs ,setUserBlogs] = useState<Blog>()
+    const [userblogs ,setUserBlogs] = useState<Blog[]>([])
 
     useEffect(()=>{
         axios.get(`${BACKEND_URL}api/v1/blog/authorblogs`,{

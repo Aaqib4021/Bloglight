@@ -38,8 +38,8 @@ const BlogCard = ( {id,title,content,name,publishedDate}: BlogCardProps) => {
   </Link>
 };
 
- const BlogCardUpdated = (BlogCard:any)=>{
-    return function EnhancedBlogCard(props){
+ const BlogCardUpdated = (BlogCard:React.FC<BlogCardProps>)=>{
+    return function EnhancedBlogCard(props:BlogCardProps){
         const id = props.id
         return<div className=" mb-2">
         <BlogCard {...props}/>
