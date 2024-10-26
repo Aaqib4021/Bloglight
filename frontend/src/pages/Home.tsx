@@ -11,7 +11,7 @@ const Home = () => {
         headers:{Authorization:localStorage.getItem("token")}
        }).
        then(response =>{
-        console.log(response);
+       
         if(response.data.isloggedin === true){
             navigate("/blogs")
         }else{
