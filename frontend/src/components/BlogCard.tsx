@@ -11,7 +11,7 @@ interface BlogCardProps {
 
 const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProps) => {
   return<Link to={`/blog/${id}`}><div className=" mt-2 px-28">
-    <div className="flex justify-between items-center p-4 border border-black">
+    <div className="flex justify-between items-center p-4">
         <div className="flex flex-col gap-2 w-[750px] ">
             <div className="flex gap-2 items-center">
                 <div>
