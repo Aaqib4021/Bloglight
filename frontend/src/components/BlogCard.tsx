@@ -11,7 +11,7 @@ interface BlogCardProps {
 
 const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProps) => {
   return<Link to={`/blog/${id}`}><div className=" mt-2 px-28">
-    <div className="flex justify-evenly items-center p-4">
+    <div className="flex justify-between items-center p-4 border border-black">
         <div className="flex flex-col gap-2 w-[750px] ">
             <div className="flex gap-2 items-center">
                 <div>
@@ -21,7 +21,7 @@ const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProp
                 <div className="font-medium text-sm text-[#DEB68C]"style={{ wordSpacing: '-2px' }}>{publishedDate}</div>
             </div>
             <div>
-                <div className="font-bold text-2xl">{title}</div>
+                <div className="font-bold text-2xl max-w-3xl border border-red-300 ">{title.slice(0,50)}...</div>
             </div>
             <div>
                 <div className="text-[#3c2309] font-serif">{content.slice(0,200)}...</div>

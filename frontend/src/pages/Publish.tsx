@@ -10,6 +10,7 @@ import {ref, uploadBytes , getDownloadURL} from "firebase/storage";
 
 const Publish = () => {
     const [warning,setWarning] = useState("hidden");
+    const [imagewarning,setImageWarning] = useState("hidden");
     const [fileName, setFileName] = useState("No Image chosen");
     const [inputs ,setInputs]= useState<CreateBlogInput>({
         title:"",
@@ -61,21 +62,29 @@ const Publish = () => {
         <Appbar/>
     <div className="p-20 ">
     <div className={`text-red-600 font-medium mb-2 ${warning}`}>Please write title atleast  of 40 characters and content of 100 characters</div>
+    <div className={`text-red-600 font-medium mb-2 ${imagewarning}`}>Please upload an image for your blog OR your image is uploading Please wait...</div>
         <div>
         <div className="flex flex-col gap-3 sm:gap-0  sm:flex-row text-white font-medium items-center justify-between">
             <button className="bg-green-500 text-white font-medium px-3 py-2 rounded-lg " onClick={async()=>{
                 if(inputs.title.length > 30 && inputs.content.length > 100){
-                    const response = await axios.post(`${BACKEND_URL}api/v1/blog`,{
-                        title:inputs.title,
-                        content:inputs.content,
-                        published:true,
-                        imageLink:inputs.imageLink
-                    },{headers:{
-                        Authorization:localStorage.getItem("token")
-                    }})
-                   if(response.data.id){
-                    navigate("/blogs")
-                   }
+                    setWarning("hidden")
+                    console.log(inputs.imageLink);
+                    if(inputs.imageLink){
+                        const response = await axios.post(`${BACKEND_URL}api/v1/blog`,{
+                            title:inputs.title,
+                            content:inputs.content,
+                            published:true,
+                            imageLink:inputs.imageLink
+                        },{headers:{
+                            Authorization:localStorage.getItem("token")
+                        }})
+                       if(response.data.id){
+                        navigate("/blogs")
+                       }
+                    }else{
+                        setImageWarning("block")
+                    }
+
                 }else{
                     setWarning("block")
                 }
