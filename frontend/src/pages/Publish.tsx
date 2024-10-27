@@ -68,7 +68,6 @@ const Publish = () => {
             <button className="bg-green-500 text-white font-medium px-3 py-2 rounded-lg " onClick={async()=>{
                 if(inputs.title.length > 30 && inputs.content.length > 100){
                     setWarning("hidden")
-                    console.log(inputs.imageLink);
                     if(inputs.imageLink){
                         const response = await axios.post(`${BACKEND_URL}api/v1/blog`,{
                             title:inputs.title,
