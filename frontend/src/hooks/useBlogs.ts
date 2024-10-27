@@ -6,6 +6,7 @@ export interface Blog {
   id: number;
   title: string;
   content: string;
+  imageLink:string;
   author: {
     name: string,
   };

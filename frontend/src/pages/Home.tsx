@@ -7,17 +7,25 @@ const Home = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-       axios.get(`${BACKEND_URL}me`,{
-        headers:{Authorization:localStorage.getItem("token")}
-       }).
-       then(response =>{
-       
-        if(response.data.isloggedin === true){
-            navigate("/blogs")
-        }else{
-            navigate("/signin")
+        try{
+            axios.get(`${BACKEND_URL}me`,{
+            headers:{Authorization:localStorage.getItem("token")}
+           }).
+           then(response =>{
+            if(response.data.isloggedin === true){
+                navigate("/blogs");
+            }else{
+                navigate("/signin");
+            }
+           })}
+           catch (e: unknown) {
+            if (e instanceof Error) {
+                alert(`Something went wrong: ${e.message}`);
+            } else {
+                alert(`Something went wrong: ${String(e)}`); // Fallback for non-Error types
+            }
         }
-       })
+
     },[])
   return <div></div>
 };

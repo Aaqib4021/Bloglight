@@ -7,7 +7,7 @@ import { useState } from "react";
 import { BACKEND_URL } from "../config";
 
 const Auth = ({ type } : { type: "signup" | "signin" }) => {
-
+const [warning ,setWarning] =useState("hidden")
 const navigate = useNavigate();
 const [inputs,setInputs]=useState<SignupInput>({
     name:"",
@@ -23,11 +23,14 @@ async function sendRequest(){
     if(response.data.jwt){
         localStorage.setItem("token",`Bearer ${response.data.jwt}`)
         navigate("/blogs")
+    }else{
+        setWarning("block")
     }
 
 }
 return <div className="h-screen  flex flex-col justify-center  font-mono">
     <div className="flex justify-center">
+
         <div className=" md:w-[500px]">
             <div>
                 <div className="font-bold text-4xl text-center tracking-wide">{type === "signup" ? "Create an Account" : "Login to Your Account"}</div>
@@ -57,6 +60,7 @@ return <div className="h-screen  flex flex-col justify-center  font-mono">
                         })
                     }}/>
                     <button className="bg-green-700 text-white px-3 py-2 rounded-lg w-full font-medium mt-4" onClick={sendRequest}>{type === "signup" ?"Sign Up" :"Sign In"}</button>
+                    <div className={`text-red-600 font-medium ${warning}`}>Check your inputs ? Email or password is incorrect</div>
                 </div>
             </div>
         </div>

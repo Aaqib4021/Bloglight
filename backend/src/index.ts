@@ -19,6 +19,7 @@ app.get("/me",async(c)=>{
     const header  = c.req.header("authorization") || "";
     const token  = header.split(" ")[1];
     try{
+
         const user = await verify(token, c.env.JWT_SECRET);
         if(user.id){
             c.status(200)
@@ -35,7 +36,7 @@ app.get("/me",async(c)=>{
         }
     }
         catch(err){
-            return c.json({err})
+            return c.json({})
         }
 
 });

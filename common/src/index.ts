@@ -17,6 +17,8 @@ export type SigninInput = zod.infer<typeof signinInput>
 export const createBlogInput = zod.object({
     title: zod.string(),
     content: zod.string(),
+    published:zod.boolean(),
+    imageLink:zod.string().optional()
 });
 
 export type CreateBlogInput = zod.infer<typeof createBlogInput>
@@ -24,7 +26,7 @@ export type CreateBlogInput = zod.infer<typeof createBlogInput>
 export const updateBlogInput = zod.object({
     title: zod.string(),
     content: zod.string(),
-    id: zod.number()
+    id: zod.number(),
 });
 
 export type UpdateBlogInput = zod.infer<typeof updateBlogInput>

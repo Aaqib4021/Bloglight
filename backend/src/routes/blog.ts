@@ -48,6 +48,8 @@ blogRouter.post('/',middleware, async(c) => {
             data:{
                 title:body.title,
                 content:body.content,
+                published:body.published,
+                imageLink:body.imageLink,
                 authorId:Number(userId)
             }
         })
@@ -112,6 +114,7 @@ blogRouter.get('/bulk',middleware,async (c) => {
             id:true,
             title:true,
             content:true,
+            imageLink:true,
             author:{
                 select:{
                     name:true
@@ -166,6 +169,7 @@ blogRouter.get('/:id',middleware, async(c) => {
             id:true,
             title:true,
             content:true,
+            imageLink:true,
             author:{
                 select:{
                     name:true

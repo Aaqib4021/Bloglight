@@ -5,11 +5,11 @@ interface BlogCardProps {
     title: string;
     content: string;
     publishedDate: string;
+    imageLink:string;
     id: number;
 }
 
-const BlogCard = ( {id,title,content,name,publishedDate}: BlogCardProps) => {
-
+const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProps) => {
   return<Link to={`/blog/${id}`}><div className=" mt-2 px-28">
     <div className="flex justify-evenly items-center p-4">
         <div className="flex flex-col gap-2 w-[750px] ">
@@ -31,7 +31,7 @@ const BlogCard = ( {id,title,content,name,publishedDate}: BlogCardProps) => {
             </div>
         </div>
         <div className="max-w-80">
-            <img src="https://brandminds.ro/wp-content/uploads/2021/07/blogging-for-business-blog-articles-e1536066690505.jpg"className=" rounded-lg" alt="blog-image"/>
+            <img src={imageLink}className=" rounded-lg" alt="blog-image"/>
         </div>
     </div>
   </div>

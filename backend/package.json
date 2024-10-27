@@ -5,9 +5,10 @@
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
-    "@aaqibba/common": "^1.0.0",
+    "@aaqibba/common": "^1.0.3",
     "@prisma/client": "^5.21.1",
     "@prisma/extension-accelerate": "^1.2.1",
+    "generate": "^0.14.0",
     "hono": "^4.6.6",
     "prisma": "^5.21.1"
   },
