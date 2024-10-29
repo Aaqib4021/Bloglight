@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
+import Shimmer from "../components/Shimmer";
 
 type DateTypes = {
     year: "numeric" | "2-digit";
@@ -27,9 +28,18 @@ const Blogs = () => {
             }
            })
     },[])
-    
-    const {blogs} = useBlogs();
 
+    const {blogs} = useBlogs();
+    if(blogs.length === 0){
+
+        return<div>
+            <Appbar/>
+            <Shimmer/>
+            <Shimmer/>
+            <Shimmer/>
+            <Shimmer/>
+        </div>
+    }
     function getRandomDate(start = new Date(2024, 0, 1), end = new Date()) {
         const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
         const options: DateTypes = { year: 'numeric', month: 'short', day: 'numeric' };

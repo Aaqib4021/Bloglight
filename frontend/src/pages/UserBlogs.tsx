@@ -5,6 +5,7 @@ import { useUserBlogs } from "../hooks/useBlogs";
 import { useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import Shimmer from "../components/Shimmer";
 type DateTypes = {
     year: "numeric" | "2-digit";
     month: "numeric" | "2-digit" | "short" | "long" | "narrow";
@@ -32,10 +33,15 @@ const UserBlogs = () => {
         return date.toLocaleDateString('en-US',options); // e.g., "Dec 12, 2024"
     }
 
-    if(!userblogs){
-        return
+    if(userblogs.length===0){
+        return <div>
+            <Appbar/>
+            <Shimmer/>
+            <Shimmer/>
+            <Shimmer/>
+            <Shimmer/>
+        </div>
     }
-
 
 
   return <div>

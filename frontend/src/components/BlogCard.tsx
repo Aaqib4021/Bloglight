@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface BlogCardProps {
@@ -10,6 +11,7 @@ interface BlogCardProps {
 }
 
 const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProps) => {
+    const [isLoading, setIsLoading] = useState(true);
   return<Link to={`/blog/${id}`}><div className=" mt-2 px-28">
     <div className="flex justify-between items-center p-4">
         <div className="flex flex-col gap-2 w-[750px] ">
@@ -30,8 +32,21 @@ const BlogCard = ( {id,title,content,name,publishedDate,imageLink}: BlogCardProp
                 <div className="text-sm font-medium text-slate-500" style={{ wordSpacing: '-2px' }} >3 min read</div>
             </div>
         </div>
-        <div className="max-w-80">
-            <img src={imageLink}className=" rounded-lg" alt="blog-image"/>
+        <div className="max-w-80 relative">
+            {isLoading && (
+                <div className="flex items-center justify-center bg-gray-200 rounded-lg">
+                   <div className="w-80 h-52 animate-pulse bg-gray-200 rounded-lg">
+                            <div className=" bg-gray-200 rounded-full w-80 mr-20"></div>
+                    </div>
+                </div>
+            )}
+            <img
+                src={imageLink}
+                className={`rounded-lg ${isLoading ? "hidden" : "block"}`}
+                alt="blog-image"
+                onLoad={() => setIsLoading(false)}
+                style={{ display: isLoading ? 'none' : 'block' }}
+            />
         </div>
     </div>
   </div>

@@ -15,8 +15,6 @@ const Blog = () => {
             headers:{Authorization:localStorage.getItem("token")}
            }).
            then(response =>{
-            console.log(response);
-            
             if(response.data.isloggedin === true){
                 // navigate("/blogs");
             }else{
@@ -25,10 +23,41 @@ const Blog = () => {
            })
     },[])
 
+
+    if(!blog){
+        return <div>
+            <Appbar/>
+            <BlogSkeleton/>
+        </div>
+    }
   return <div>
     <Appbar/>
-    {blog ? <FullBlog blog={blog} /> : <p>Loading blog...</p>}
+    <FullBlog blog={blog} />
   </div>;
 };
+const BlogSkeleton = ()=>{
+    return <div className="p-8 flex justify-between items-center">
+        <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">
+            <div className="flex">
+                <div className="h-4  bg-gray-200 rounded-full w-80 mb-4"></div>
+
+            </div>
+            <div className="text-xl font-semibold pt-2">
+                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            </div>
+            <div className="text-md font-thin">
+                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            </div>
+            <div className="text-slate-500 text-sm font-thin pt-4">
+                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            </div>
+        </div>
+        <div className="w-80 h-52 animate-pulse bg-gray-200 rounded-lg">
+            <div className="h-4 bg-gray-200 rounded-full w-48 mb-4"></div>
+            <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+        </div>
+    </div>
+}
 
 export default Blog;
